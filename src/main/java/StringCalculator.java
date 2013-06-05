@@ -69,4 +69,9 @@ public class StringCalculator {
         }
         return result;
     }
+
+    public String getMultiDefineDelimiter(String inputString) {
+        String result = "";
+        return result;
+    }
 }
