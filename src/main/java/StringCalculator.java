@@ -21,21 +21,8 @@ public class StringCalculator {
 
             if (inputString.matches(define)) {
                 regex = getMultiDefineDelimiter(inputString);
-                String tempString = regex;
                 String[] getString = inputString.split("\\n");
                 inputString = getString[1];
-//                String temp = "";
-//                for (int j = 0 ; j< tempString.length(); j++) {
-//                    char t = tempString.charAt(j);
-//                    if ((t == '*') || (t == '?') || (t == '+') || (t =='[') || (t==']') || ( t== '(') || ( t==')')) {
-//                        temp += "\\" + t;
-//                    }
-//                    else {
-//                        temp += t;
-//                    }
-//                }
-//                regex = temp;
-                System.out.println(regex);
             }
             String[] inputNumbers = inputString.split(regex);
             for (String si : inputNumbers) {
@@ -58,18 +45,6 @@ public class StringCalculator {
         }
     }
 
-    public String getDefineDelimiter(String inputString) {
-        String result = "";
-        String getDefinePattern = "(//)(\\[)(.*)(\\])(\\n)(.*)";
-        if (inputString.matches(getDefinePattern)) {
-            String[] preDefine = inputString.split("\\n");
-            String defineDelimiter = preDefine[0].substring(3,preDefine[0].length()-1);
-            //System.out.println(defineDelimiter);
-            result = defineDelimiter;
-        }
-        return result;
-    }
-
     public String getMultiDefineDelimiter(String inputString) {
         String result = "";
         result += "[";
@@ -88,7 +63,6 @@ public class StringCalculator {
                 }
             }
             result += "]";
-            System.out.println(result);
         }
         return result;
     }
