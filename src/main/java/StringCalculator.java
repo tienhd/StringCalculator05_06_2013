@@ -20,21 +20,21 @@ public class StringCalculator {
             boolean ok = false;
 
             if (inputString.matches(define)) {
-                regex = getDefineDelimiter(inputString);
+                regex = getMultiDefineDelimiter(inputString);
                 String tempString = regex;
                 String[] getString = inputString.split("\\n");
                 inputString = getString[1];
-                String temp = "";
-                for (int j = 0 ; j< tempString.length(); j++) {
-                    char t = tempString.charAt(j);
-                    if ((t == '*') || (t == '?') || (t == '+') || (t =='[') || (t==']') || ( t== '(') || ( t==')')) {
-                        temp += "\\" + t;
-                    }
-                    else {
-                        temp += t;
-                    }
-                }
-                regex = temp;
+//                String temp = "";
+//                for (int j = 0 ; j< tempString.length(); j++) {
+//                    char t = tempString.charAt(j);
+//                    if ((t == '*') || (t == '?') || (t == '+') || (t =='[') || (t==']') || ( t== '(') || ( t==')')) {
+//                        temp += "\\" + t;
+//                    }
+//                    else {
+//                        temp += t;
+//                    }
+//                }
+//                regex = temp;
                 System.out.println(regex);
             }
             String[] inputNumbers = inputString.split(regex);
@@ -72,6 +72,24 @@ public class StringCalculator {
 
     public String getMultiDefineDelimiter(String inputString) {
         String result = "";
+        result += "[";
+        String getDefinePattern = "(//)(.*)(\\n)(.*)";
+        if (inputString.matches(getDefinePattern)) {
+            String[] temp1 = inputString.split("\\n");
+            String[] temp2 = temp1[0].split("//");
+            String delimiterString = temp2[1];
+            delimiterString = delimiterString.replaceAll("\\["," ");
+            delimiterString = delimiterString.replaceAll("\\]"," ");
+            String[] delimiterList = delimiterString.split(" ");
+
+            for (String di: delimiterList) {
+                if (!di.isEmpty()){
+                    result += "(" + di + ")";
+                }
+            }
+            result += "]";
+            System.out.println(result);
+        }
         return result;
     }
 }
